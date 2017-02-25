@@ -7,6 +7,15 @@ const tables = new Map<string, boolean>();
 const reducers: {[key: string]: ActionReducer<any> } = {};
 const tableCreatedSubject$ = new ReplaySubject<string>(1);
 
+export interface Components {}
+export const Components: Components = {} as any;
+
+export interface Guards {}
+export const Guards: Guards = {} as any;
+
+export interface Effects {}
+export const Effects: Effects = {} as any;
+
 export interface Actions {}
 export const Actions: Actions = {} as any;
 
