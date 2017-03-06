@@ -2,39 +2,144 @@ import { createSelector } from 'reselect';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { Observable } from 'rxjs/Observable';
 import { ActionReducer } from '@ngrx/store';
+import '@ngrx/core/add/operator/select';
+// import { compose } from '@ngrx/core/compose';
+export { compose } from '@ngrx/core/compose';
 
 const tables = new Map<string, boolean>();
 const reducers: {[key: string]: ActionReducer<any> } = {};
 const tableCreatedSubject$ = new ReplaySubject<string>(1);
 
-export interface Components {}
-export const Components: Components = {} as any;
+export interface IGlobalRegistry {
+  reducers: Model.global.IReducerRegistry;
+  queries: Model.global.IQueryRegistry;
+}
 
-export interface Guards {}
-export const Guards: Guards = {} as any;
+export interface IMasterRegistry {
+  global: IGlobalRegistry;
+  registries: Array<string>;
+  modules: Model.IModuleRegistry;
+  categories: Model.ICategoryRegistry;
+  components: Model.IComponentRegistry;
+  classes: Model.IClassRegistry;
+  services: Model.IServiceRegistry;
+  directives: Model.IDirectiveRegistry;
+  providers: Model.IProviderRegistry;
+  objects: Model.IObjectRegistry;
+  reducers: Model.IReducerRegistry;
+  queries: Model.IQueryRegistry;
+  actions: Model.IActionRegistry;
+  guards: Model.IGuardRegistry;
+  effects: Model.IEffectRegistry;
+  state: Model.IAppState;
+}
 
-export interface Effects {}
-export const Effects: Effects = {} as any;
+export interface IQueryRegistryUtils {
+  _createQuery<Y, X extends keyof Y>(myType: { new (): Y }, myAttribute: X): (stream: Observable<Y>) => Observable<Y[X]>;
+  _generateSelector(key: string): Query<any>;
+ // _generateQuery<X extends keyof QueryRegistry>(x: X): any;
+}
 
-export interface Actions {}
-export const Actions: Actions = {} as any;
+class QueryRegistryUtils implements IQueryRegistryUtils {
+  _createQuery<Y, X extends keyof Y>(myType: { new (...params: any[]): Y }, myAttribute: X): (stream: Observable<Y>) => Observable<Y[X]> {
+    return (stream: Observable<Y>) => stream.select(this._generateSelector(myAttribute));
+  };
+  _generateSelector(key: string): Query<any> {
+    return (state: any) => state[key];
+  };
+  // _generateQuery(path: string): any {
+  //   const properties: Array<string> = path.split('.');
+  //   let index = properties.length - 1;
+  //   const queries: Array<(stream: Observable<any>) => Observable<any>> = [];
+  //   properties.reduce((propString, prop) => {
+  //     propString += prop;
+  //     queries[index] = Registry.queries[propString];
+  //     index--;
+  //     return propString;
+  //   });
 
-export interface State {}
-export const State: State = {} as any;
+  //   return compose(queries);
+  // };
+}
 
-export interface Queries {}
+export const queryRegistryUtils: IQueryRegistryUtils = new QueryRegistryUtils();
 
-export const Queries: Queries = {} as any;
+export class QueryRegistry implements Model.IQueryRegistry {
+  [index: string]: (stream: Observable<any>) => Observable<any>;
+}
+
+export class MasterRegistryImpl implements IMasterRegistry {
+
+    global: IGlobalRegistry = {
+      reducers: {},
+      queries: {}
+    };
+
+    registries: ['classes', 'services', 'directives', 'providers', 'objects', 'reducers', 'queries', 'actions', 'guards', 'effects', 'state'];
+    modules: Model.IModuleRegistry = {};
+    categories: Model.ICategoryRegistry = {};
+    components: Model.IComponentRegistry = {};
+    classes: Model.IClassRegistry = {};
+    services: Model.IServiceRegistry = {};
+    directives: Model.IDirectiveRegistry = {};
+    providers: Model.IProviderRegistry = {};
+    objects: Model.IObjectRegistry = {};
+    reducers: Model.IReducerRegistry = {};
+    queries: Model.IQueryRegistry = new QueryRegistry();
+    actions: Model.IActionRegistry = {};
+    guards: Model.IGuardRegistry = {};
+    effects: Model.IEffectRegistry = {};
+    state: Model.IAppState = {};
+}
+
+export const Registry: IMasterRegistry = new MasterRegistryImpl();
+
+export interface IEntityFactory {};
+export class EntityFactory implements IEntityFactory {};
+
+export const Categories: Model.ICategoryRegistry = {} as any;
+
+export const Components: Model.IComponentRegistry = {} as any;
+
+export const Guards: Model.IGuardRegistry = {} as any;
+
+export const Effects: Model.IEffectRegistry = {} as any;
+
+export const Actions: Model.IActionRegistry = {} as any;
+
+export const State: Model.IAppState = {} as any;
+
+export const Queries: Model.IQueryRegistry = {} as any;
 
 export interface Root {}
 export const Root: Root = {} as any;
 
 export namespace Model {
-  const X = 15;
+  export namespace global {
+    export interface IQueryRegistry {};
+    export interface IReducerRegistry {};
+  }
+
+  export interface IModuleRegistry {};
+  export interface ICategoryRegistry {};
+  export interface IComponentRegistry {};
+  export interface IClassRegistry {};
+  export interface IServiceRegistry {};
+  export interface IDirectiveRegistry {};
+  export interface IProviderRegistry {};
+  export interface IObjectRegistry {};
+  export interface IReducerRegistry {};
+  export interface IQueryRegistry {
+   // [index: string]: (stream: Observable<any>) => Observable<any>;
+  };
+  export interface IActionRegistry {};
+  export interface IGuardRegistry {};
+  export interface IEffectRegistry {};
+  export interface IAppState {};
 }
 
 export interface Query<TTarget> {
-  (state: State): TTarget;
+  (state: Model.IAppState): TTarget;
 }
 
 export interface Type<T> {
@@ -46,7 +151,6 @@ namespace utils {
     return (state: any) => state[key];
   }
 }
-
 
 export function safeQuery(query: any, key: string): Query<any> {
   return typeof query === 'function' ? query : utils.generateQuery(key);
@@ -76,10 +180,10 @@ export const tableCreated$: Observable<string> = tableCreatedSubject$.asObservab
 /**
  * Create a factory for creating selectors that relay on a base selector to transform the state.
  * @param base
- * @returns {(selector:(state:TState)=>TType)=>Selector<State, TOutput>}
+ * @returns {(selector:(state:TState)=>TType)=>Selector<Model.IAppState, TOutput>}
  */
-export function combineFactory<TState>(base: Query<TState>): <TType>(selector: (state: TState) => TType) => (state: State) => TType  {
-  return <TType>(selector: (state:TState) => TType) => createSelector(base, selector);
+export function combineFactory<TState>(base: Query<TState>): <TType>(selector: (state: TState) => TType) => (state: Model.IAppState) => TType  {
+  return <TType>(selector: (state: TState) => TType) => createSelector(base, selector);
 }
 
 /**
@@ -104,9 +208,9 @@ export function setRootQuery<TState>(domain: string, query?: Query<TState>): Que
  * i.e: the query create expects an object that the root will select.
  * If the a root selector for the domain does not exist creats is (see setRootQuery).
  * @param domain
- * @returns {(selector:(state:TState)=>TType)=>(state:State)=>TType}
+ * @returns {(selector:(state:TState)=>TType)=>(state:Model.IAppState)=>TType}
  */
-export function combineRootFactory<TState>(domain: string): <TType>(selector: (state: TState) => TType) => (state: State) => TType  {
+export function combineRootFactory<TState>(domain: string): <TType>(selector: (state: TState) => TType) => (state: Model.IAppState) => TType  {
   const rootFn: Query<TState> = Root[domain] || setRootQuery<TState>(domain);
   return combineFactory(rootFn);
 }
