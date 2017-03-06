@@ -6,7 +6,7 @@
     "noImplicitAny": false,
     "sourceMap": true,
     "declaration": true,
-    "outDir": "./node_modules/ngrx-domains",
+    "outDir": "./node_modules/ngrx-registry",
     "noEmitOnError": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,

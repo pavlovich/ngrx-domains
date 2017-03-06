@@ -18,7 +18,7 @@ export interface _Book {
 
 
 
-declare module 'ngrx-domains' {
+declare module 'ngrx-registry' {
   export namespace Model {
     export type Book = _Book;
   }

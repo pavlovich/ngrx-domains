@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
-import { State, Queries, Model } from 'ngrx-domains';
+import { State, Queries, Model } from 'ngrx-registry';
 
 
 @Component({

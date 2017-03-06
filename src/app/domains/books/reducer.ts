@@ -1,11 +1,11 @@
-import { Actions, BooksState, State , Model } from 'ngrx-domains';
+import { Actions, BooksState, State , Model } from 'ngrx-registry';
 
 
 /*=
  * The ngrx example-app originally uses a class for every action.
  * The classes does not come with a static property representing the token for the action (type),
  * the example-app uses an exported object (ActionTypes) to export the types.
- * Since ngrx-domains does not provide a way to export the tokens in the global api they can only be
+ * Since ngrx-registry does not provide a way to export the tokens in the global api they can only be
  * access directly (import { ActionTypes } from './actions').
  * Direct import will work fine but when we want to import action types from a different domain we
  * need to import it directly which couples both domains together.

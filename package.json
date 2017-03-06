@@ -1,12 +1,12 @@
 {
-  "name": "ngrx-domains",
+  "name": "ngrx-registry",
   "version": "1.0.0-alpha.0",
   "description": "A Global, Type friendly, registry for your **NGRX** logic",
-  "author": "Shlomi Assaf <shlomiasaf@gmail.com>",
+  "author": "Peter Pavlovich <pavlovich@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/shlomiassaf/ngrx-domains.git"
+    "url": "git+https://github.com/pavlovich/ngrx-registry.git"
   },
   "keywords": [
     "RxJS",
@@ -66,7 +66,7 @@
     "typescript": "2.0.2"
   },
   "bugs": {
-    "url": "https://github.com/shlomiassaf/ngrx-domains/issues"
+    "url": "https://github.com/pavlovich/ngrx-registry/issues"
   },
-  "homepage": "https://github.com/shlomiassaf/ngrx-domains#readme"
+  "homepage": "https://github.com/pavlovich/ngrx-registry#readme"
 }

@@ -1,4 +1,4 @@
-import { StatsState, Query, Queries, Root, combineRootFactory } from 'ngrx-domains';
+import { StatsState, Query, Queries, Root, combineRootFactory } from 'ngrx-registry';
 
 export interface StatsQueries {
   searchCount: Query<number>;
@@ -13,7 +13,7 @@ Queries.stats = {
   searchHistory: fromRoot( state => state.searchHistory )
 };
 
-declare module 'ngrx-domains' {
+declare module 'ngrx-registry' {
   interface Root {
     stats: Query<StatsState>;
   }

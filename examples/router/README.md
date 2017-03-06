@@ -1,1 +1,1 @@
-Integrating `@ngrx/router-store` with `ngrx-domains`
+Integrating `@ngrx/router-store` with `ngrx-registry`

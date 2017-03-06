@@ -1,4 +1,4 @@
-# ngrx-domains
+# ngrx-registry
 
 **Get your state together** - A plugin oriented Global registry for your **NGRX** logic
 
@@ -19,7 +19,7 @@ Create a dependency free global redux role objects, as you go, per module:
   
 Access redux role objects from a single import:  
 ```ts
-import { Actions, State, Model, Root, Queries } from 'ngrx-domains'
+import { Actions, State, Model, Root, Queries } from 'ngrx-registry'
 
 @Component({
   selector: 'my-cmp'
@@ -50,12 +50,12 @@ export class MyCmpComponent {
 ```
 
 ## Demo
-See the `src` folder, containing a ported version of [@ngrx/example-app](https://github.com/ngrx/example-app) using `ngrx-domains`
+See the `src` folder, containing a ported version of [@ngrx/example-app](https://github.com/ngrx/example-app) using `ngrx-registry`
   
-The `ngrx-domains` version of `@ngrx/example-app` contains a **lazy loading demo** where a domain
+The `ngrx-registry` version of `@ngrx/example-app` contains a **lazy loading demo** where a domain
 is registered with a lazy-loaded module (stats pages).
 
-See the [demo site](https://shlomiassaf.github.io/ngrx-domains).  
+See the [demo site](https://pavlovich.github.io/ngrx-registry).  
 
 
 ## Alpha release
@@ -185,7 +185,7 @@ A domain is a managed table that comes with:
   - Predefined observed **Views** (queries)
 
 ### How does it work?
-**ngrx-domains** works on 2 levels, runtime and design time.  
+**ngrx-registry** works on 2 levels, runtime and design time.  
 It uses **TypeScripts** `modules` and `namespaces` to extend types, similar to the way **rxjs** 5 allows extending `Observables`
 
 #####Runtime:  
@@ -200,19 +200,19 @@ it has no footprint on the compiled code emitted by TypeScript.
 
 ## Lazy domains
 Angular can lazy load modules, infect its a must for all medium sized apps and up.
-It is obvious that we want to define domains inside modules and load them only when required. Since **ngrx-domains** is plugin oriented this is quite easy.
+It is obvious that we want to define domains inside modules and load them only when required. Since **ngrx-registry** is plugin oriented this is quite easy.
 
-**ngrx-domains** has an observable that emits whenever a new domain is registered, we can subscribe to it and re-create the reducer tree every time a new domain is added.
+**ngrx-registry** has an observable that emits whenever a new domain is registered, we can subscribe to it and re-create the reducer tree every time a new domain is added.
 
 ```
 import { combineReducers } from '@ngrx/store';
-import { getReducers, tableCreated$ } from 'ngrx-domains';
+import { getReducers, tableCreated$ } from 'ngrx-registry';
 let reducer;
 
 
 tableCreated$.subscribe( (table: string) => {
   console.log('Reducer updated');
-  // ngrx-domains returns a reducers map, you can use combineReducers or any other implementation...
+  // ngrx-registry returns a reducers map, you can use combineReducers or any other implementation...
   reducer = combineReducers(getReducers());
 });
 
@@ -244,7 +244,7 @@ This structure is just for demonstration, you can follow any convention you like
 > File: Model.ts
 
 ```ts
-import { register } from 'ngrx-domains';
+import { register } from 'ngrx-registry';
 
 namespace UserModels {
   export class SimpleUser {
@@ -255,7 +255,7 @@ namespace UserModels {
 
 register(UserModels.SimpleUser);
 
-declare module 'ngrx-domains' {
+declare module 'ngrx-registry' {
   export namespace Model {
     export const SimpleUser: typeof UserModels.SimpleUser;
     export type SimpleUser = UserModels.SimpleUser;
@@ -267,7 +267,7 @@ declare module 'ngrx-domains' {
 
 ```ts
 import { Action } from '@ngrx/store';
-import { Actions } from 'ngrx-domains';
+import { Actions } from 'ngrx-registry';
 
 export class UserActions {
   static CHANGE_NAME = '[SimpleUser] Change User Name';
@@ -283,7 +283,7 @@ export class UserActions {
 Actions.simpleUser = new UserActions();
 
 // adding type information
-declare module 'ngrx-domains' {
+declare module 'ngrx-registry' {
   interface Actions {
     simpleUser: UserActions;
   }
@@ -293,7 +293,7 @@ declare module 'ngrx-domains' {
 >File: State.ts
 
 ```ts
-import { State, Model } from 'ngrx-domains';
+import { State, Model } from 'ngrx-registry';
 const { SimpleUser } = Model;
 
 // This is our initial state
@@ -303,7 +303,7 @@ State.simpleUser = {
 };
 
 // type information
-declare module 'ngrx-domains' {
+declare module 'ngrx-registry' {
   export interface SimpleUserState {
     user: Model.SimpleUser;
     loggedIn: boolean;
@@ -318,8 +318,8 @@ declare module 'ngrx-domains' {
 >File: Queries.ts
 
 ```ts
-import { Query } from 'ngrx-domains';
-import { SimpleUserState, Queries, Root, combineRootFactory } from 'ngrx-domains/State';
+import { Query } from 'ngrx-registry';
+import { SimpleUserState, Queries, Root, combineRootFactory } from 'ngrx-registry/State';
 
 export interface SimpleQueries {
   // IN: State.simpleUser -> OUT: State.simpleUser.loggedIn
@@ -333,7 +333,7 @@ Queries.simpleUser = {
   loggedIn: fromRoot( state => state.loggedIn )
 };
 
-declare module 'ngrx-domains' {
+declare module 'ngrx-registry' {
   interface Root {
     simpleUser: Query<SimpleUserState>;
   }
@@ -348,7 +348,7 @@ declare module 'ngrx-domains' {
 
 ```ts
 import { Action } from '@ngrx/store';
-import { State, SimpleUserState, Model, UserActions } from 'ngrx-domains';
+import { State, SimpleUserState, Model, UserActions } from 'ngrx-registry';
 
 const { SimpleUser } = Model;
 
@@ -372,7 +372,7 @@ export function reducer(state: SimpleUserState, action: Action): SimpleUserState
 >File: index.ts
 
 ```ts
-import { createDomain } from 'ngrx-domains';
+import { createDomain } from 'ngrx-registry';
 import './Model';
 import './State';
 import './Actions';
@@ -386,14 +386,14 @@ createDomain('simpleUser', reducer);
 
 
 ## Development
-**lib** - Directory holding the `ngrx-domains` library code in TS.
+**lib** - Directory holding the `ngrx-registry` library code in TS.
 **src** - A demo app until units tests...
 
 The demo apps should consume a compiled version of **lib**, this is why there is a compilation process for the lib separate from the demo app.
 
 `npm run start` will fire lib compilation + watch and demo app server via angular-cli (`ng serve`). 
 
-**lib** compiles to `node_modules/ngrx-domains`, `src` is a module directory on the demo app so any `import {} from 'ngrx-domains'` will work.
+**lib** compiles to `node_modules/ngrx-registry`, `src` is a module directory on the demo app so any `import {} from 'ngrx-registry'` will work.
  
 ## TODO / DESIGN / THOUGHTS:
   - Use metadata via decorators in addition to `createDomain`?

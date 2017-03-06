@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Actions } from 'ngrx-domains';
+import { Actions } from 'ngrx-registry';
 
 
 /**
@@ -34,7 +34,7 @@ Actions.stats = {
   ResetStatsAction
 };
 
-declare module 'ngrx-domains' {
+declare module 'ngrx-registry' {
   interface Actions {
     stats: {
       TYPES: typeof ActionTypes,

@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { Actions, State, Queries } from 'ngrx-domains';
+import { Actions, State, Queries } from 'ngrx-registry';
 
 @Component({
   selector: 'book-collection-app',

@@ -11,7 +11,7 @@ import { Observable } from 'rxjs/Observable';
 import { empty } from 'rxjs/observable/empty';
 import { of } from 'rxjs/observable/of';
 
-import { Actions as DomainActions } from 'ngrx-domains'
+import { Actions as DomainActions } from 'ngrx-registry'
 import { SearchAction } from './actions'
 import { GoogleBooksService } from '../../services/google-books';
 

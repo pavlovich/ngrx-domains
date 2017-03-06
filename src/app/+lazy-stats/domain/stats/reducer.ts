@@ -1,4 +1,4 @@
-import { Actions, StatsState, State } from 'ngrx-domains';
+import { Actions, StatsState, State } from 'ngrx-registry';
 
 // we have a redundant "query" property that also exists on the "search" state.
 // we can omit it by setting the query to accept the root state

@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Actions } from 'ngrx-domains';
+import { Actions } from 'ngrx-registry';
 import { type } from '../../util';
 
 export const ActionTypes = {
@@ -23,7 +23,7 @@ Actions.layout = {
   CloseSidenavAction
 };
 
-declare module 'ngrx-domains' {
+declare module 'ngrx-registry' {
   interface Actions {
     layout: {
       TYPES: typeof ActionTypes,

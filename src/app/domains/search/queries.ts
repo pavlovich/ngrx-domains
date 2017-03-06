@@ -1,4 +1,4 @@
-import { SearchState, Query, Queries, Root, combineRootFactory } from 'ngrx-domains';
+import { SearchState, Query, Queries, Root, combineRootFactory } from 'ngrx-registry';
 
 export interface SearchQueries {
   getIds: Query<string[]>;
@@ -18,7 +18,7 @@ Queries.search = {
 };
 
 
-declare module 'ngrx-domains' {
+declare module 'ngrx-registry' {
   interface Root {
     search: Query<SearchState>;
   }

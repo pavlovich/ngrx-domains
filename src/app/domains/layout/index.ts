@@ -1,4 +1,4 @@
-import { createDomain } from 'ngrx-domains';
+import { createDomain } from 'ngrx-registry';
 import './state';
 import './actions';
 import './queries';

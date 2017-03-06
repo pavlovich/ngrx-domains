@@ -1,4 +1,4 @@
-import { Actions, CollectionState, State } from 'ngrx-domains';
+import { Actions, CollectionState, State } from 'ngrx-registry';
 
 export function reducer(state: CollectionState = State.collection, action: any): CollectionState {
   switch (action.constructor) {

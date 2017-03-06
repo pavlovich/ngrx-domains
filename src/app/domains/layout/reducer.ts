@@ -1,4 +1,4 @@
-import { Actions, LayoutState, State } from 'ngrx-domains';
+import { Actions, LayoutState, State } from 'ngrx-registry';
 
 export function reducer(state: LayoutState = State.layout, action: any): LayoutState {
   switch (action.constructor) {

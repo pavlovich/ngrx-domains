@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { Model, Query, Queries } from 'ngrx-domains';
+import { Model, Query, Queries } from 'ngrx-registry';
 
 const { books, search, collection } = Queries;
 
@@ -37,7 +37,7 @@ Queries.VIEWS = {
 };
 
 
-declare module 'ngrx-domains' {
+declare module 'ngrx-registry' {
   interface Queries {
     VIEWS: VIEWQueries;
   }

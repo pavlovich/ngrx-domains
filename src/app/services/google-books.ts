@@ -2,7 +2,7 @@ import 'rxjs/add/operator/map';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { Model } from 'ngrx-domains';
+import { Model } from 'ngrx-registry';
 
 
 @Injectable()

@@ -1,4 +1,4 @@
-import { Actions, SearchState, State } from 'ngrx-domains';
+import { Actions, SearchState, State } from 'ngrx-registry';
 
 
 export function reducer(state: SearchState = State.search, action: any): SearchState {

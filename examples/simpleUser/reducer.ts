@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { State, SimpleUserState, Model } from 'ngrx-domains';
+import { State, SimpleUserState, Model } from 'ngrx-registry';
 import { UserActions } from './Actions';
 
 export function reducer(state: SimpleUserState, action: Action): SimpleUserState {

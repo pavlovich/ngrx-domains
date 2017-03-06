@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs/Subscription';
 
-import { Actions, State } from 'ngrx-domains';
+import { Actions, State } from 'ngrx-registry';
 
 /**
  * Note: Container components are also reusable. Whether or not

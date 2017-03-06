@@ -1,4 +1,4 @@
-import { State } from 'ngrx-domains';
+import { State } from 'ngrx-registry';
 
 State.collection = {
   loaded: false,
@@ -6,7 +6,7 @@ State.collection = {
   ids: []
 };
 
-declare module 'ngrx-domains' {
+declare module 'ngrx-registry' {
   export interface CollectionState {
     loaded: boolean;
     loading: boolean;

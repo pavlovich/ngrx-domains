@@ -1,4 +1,4 @@
-import { State } from 'ngrx-domains';
+import { State } from 'ngrx-registry';
 
 State.search = {
   ids: [],
@@ -6,7 +6,7 @@ State.search = {
   query: ''
 };
 
-declare module 'ngrx-domains' {
+declare module 'ngrx-registry' {
   export interface SearchState {
     ids: string[];
     loading: boolean;

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Model } from 'ngrx-domains';
+import { Model } from 'ngrx-registry';
 
 
 @Component({

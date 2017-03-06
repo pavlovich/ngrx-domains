@@ -12,7 +12,7 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 
 import { GoogleBooksService } from '../services/google-books';
-import { State, Queries, Actions } from 'ngrx-domains'
+import { State, Queries, Actions } from 'ngrx-registry'
 
 /**
  * Guards are hooks into the route resolution process, providing an opportunity
@@ -56,7 +56,7 @@ export class BookExistsGuard implements CanActivate {
   hasBookInApi(id: string): Observable<boolean> {
     return this.googleBooks.retrieveBook(id)
       .map(bookEntity => new Actions.books.LoadAction(bookEntity))
-      //TODO(shlomiassaf): Find how ngrx-domains can export the type of the actions
+      //TODO(pavlovich): Find how ngrx-registry can export the type of the actions
       .do((action: any /* LoadAction */) => this.store.dispatch(action))
       .map(book => !!book)
       .catch(() => {

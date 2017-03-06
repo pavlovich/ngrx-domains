@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { Model, BooksState, Query, Queries, Root, combineRootFactory } from 'ngrx-domains';
+import { Model, BooksState, Query, Queries, Root, combineRootFactory } from 'ngrx-registry';
 
 /**
  * create the root selector for the "books" state, then create a factory for child selectors,
@@ -25,7 +25,7 @@ const fromRoot = combineRootFactory<BooksState>('books');
 /** COMPLETE TYPE INFORMATION
  *
  *     Setting "Queries.books" is 100% type safe since we must follow the structure defined in
- *     the "BookQueries" interface. The module declaration below (declare module 'ngrx-domains')
+ *     the "BookQueries" interface. The module declaration below (declare module 'ngrx-registry')
  *     makes sure TypeScript knows about it.
  *
  *     This means that:
@@ -94,7 +94,7 @@ Queries.books  = {
   getAll: createSelector(getEntities, getIds, (entities, ids) => ids.map(id => entities[id]))
 };
 
-declare module 'ngrx-domains' {
+declare module 'ngrx-registry' {
   interface Root {
     books: Query<BooksState>;
   }
@@ -116,7 +116,7 @@ declare module 'ngrx-domains' {
  *
  * Queries.books = books; // THIS IS THE CHANGE
  *
- * declare module 'ngrx-domains' {
+ * declare module 'ngrx-registry' {
  *   interface Root {
  *     books: Query<BooksState>;
  *   }

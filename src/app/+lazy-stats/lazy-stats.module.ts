@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from '@angular/material';
 import { Store } from '@ngrx/store';
-import { State, Actions } from 'ngrx-domains';
+import { State, Actions } from 'ngrx-registry';
 
 import { StatsPageComponent } from './components/stats-page/stats-page.component';
 import { routes } from './routes';

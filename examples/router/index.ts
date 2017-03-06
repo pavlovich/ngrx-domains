@@ -1,5 +1,5 @@
 import { routerReducer } from '@ngrx/router-store';
-import { createDomain } from 'ngrx-domains';
+import { createDomain } from 'ngrx-registry';
 import './State';
 import './Actions';
 

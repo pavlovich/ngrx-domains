@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Actions, Model } from 'ngrx-domains';
+import { Actions, Model } from 'ngrx-registry';
 
 import { type } from '../../util';
 
@@ -58,7 +58,7 @@ Actions.books = {
   SelectAction
 };
 
-declare module 'ngrx-domains' {
+declare module 'ngrx-registry' {
   interface Actions {
     books: {
       TYPES: typeof ActionTypes,

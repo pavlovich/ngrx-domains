@@ -1,4 +1,4 @@
-import { CollectionState, Query, Queries, Root, combineRootFactory } from 'ngrx-domains';
+import { CollectionState, Query, Queries, Root, combineRootFactory } from 'ngrx-registry';
 
 export interface CollectionQueries {
   getLoaded: Query<boolean>;
@@ -15,7 +15,7 @@ Queries.collection = {
   getIds: fromRoot( state => state.ids )
 };
 
-declare module 'ngrx-domains' {
+declare module 'ngrx-registry' {
   interface Root {
     collection: Query<CollectionState>;
   }

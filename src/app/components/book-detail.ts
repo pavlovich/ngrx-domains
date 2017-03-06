@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Model } from 'ngrx-domains';
+import { Model } from 'ngrx-registry';
 
 
 @Component({

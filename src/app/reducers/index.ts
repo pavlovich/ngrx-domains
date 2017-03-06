@@ -1,5 +1,5 @@
 import { ActionReducer } from '@ngrx/store';
-import { State, getReducers, tableCreated$ } from 'ngrx-domains';
+import { State, getReducers, tableCreated$ } from 'ngrx-registry';
 import { environment } from '../../environments/environment';
 
 /**

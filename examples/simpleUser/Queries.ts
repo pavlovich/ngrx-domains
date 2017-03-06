@@ -1,4 +1,4 @@
-import { SimpleUserState, Query, Queries, Root, combineRootFactory } from 'ngrx-domains';
+import { SimpleUserState, Query, Queries, Root, combineRootFactory } from 'ngrx-registry';
 
 export interface SimpleQueries {
   // IN: State.simpleUser -> OUT: State.simpleUser.loggedIn
@@ -13,7 +13,7 @@ Queries.simpleUser = {
 };
 
 
-declare module 'ngrx-domains' {
+declare module 'ngrx-registry' {
   interface Root {
     simpleUser: Query<SimpleUserState>;
   }

@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Actions, Model } from 'ngrx-domains';
+import { Actions, Model } from 'ngrx-registry';
 import { type } from '../../util';
 
 
@@ -93,7 +93,7 @@ Actions.collection = {
   LoadFailAction
 };
 
-declare module 'ngrx-domains' {
+declare module 'ngrx-registry' {
   interface Actions {
     collection: {
       TYPES: typeof ActionTypes,

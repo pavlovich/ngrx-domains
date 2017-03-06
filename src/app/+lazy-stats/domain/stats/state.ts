@@ -1,4 +1,4 @@
-import { State } from 'ngrx-domains';
+import { State } from 'ngrx-registry';
 
 State.stats = {
   searchCount: 0,
@@ -6,7 +6,7 @@ State.stats = {
   query: ''
 };
 
-declare module 'ngrx-domains' {
+declare module 'ngrx-registry' {
   export interface StatsState {
     searchCount: number;
     searchHistory: string[];

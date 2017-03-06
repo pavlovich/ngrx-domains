@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs/Observable';
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { State, Queries } from 'ngrx-domains';
+import { State, Queries } from 'ngrx-registry';
 
 @Component({
   selector: 'app-stats-page',

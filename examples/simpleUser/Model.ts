@@ -1,4 +1,4 @@
-import { register } from 'ngrx-domains';
+import { register } from 'ngrx-registry';
 
 namespace UserModels {
   export class SimpleUser {
@@ -9,7 +9,7 @@ namespace UserModels {
 
 register(UserModels.SimpleUser);
 
-declare module 'ngrx-domains' {
+declare module 'ngrx-registry' {
   export namespace Model {
     export const SimpleUser: typeof UserModels.SimpleUser;
     export type SimpleUser = UserModels.SimpleUser;

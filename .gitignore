@@ -57,4 +57,4 @@ release
 distout
 *.ngfactory.ts
 
-src/ngrx-domains
+src/ngrx-registry

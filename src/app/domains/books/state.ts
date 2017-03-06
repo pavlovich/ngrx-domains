@@ -1,4 +1,4 @@
-import { State, Model } from 'ngrx-domains';
+import { State, Model } from 'ngrx-registry';
 
 State.books = {
   ids: [],
@@ -6,7 +6,7 @@ State.books = {
   selectedBookId: null,
 };
 
-declare module 'ngrx-domains' {
+declare module 'ngrx-registry' {
   export interface BooksState {
     ids: string[];
     entities: { [id: string]: Model.Book };

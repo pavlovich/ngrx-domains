@@ -13,8 +13,8 @@ import { defer } from 'rxjs/observable/defer';
 import { of } from 'rxjs/observable/of';
 
 
-import { Model } from 'ngrx-domains';
-import { Actions as DomainActions } from 'ngrx-domains'
+import { Model } from 'ngrx-registry';
+import { Actions as DomainActions } from 'ngrx-registry'
 import { ActionTypes, RemoveBookAction, AddBookAction } from './actions'
 
 

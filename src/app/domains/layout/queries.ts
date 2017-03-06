@@ -1,4 +1,4 @@
-import { LayoutState, Query, Queries, Root, combineRootFactory } from 'ngrx-domains';
+import { LayoutState, Query, Queries, Root, combineRootFactory } from 'ngrx-registry';
 
 export interface LayoutQueries {
   getShowSidenav: Query<boolean>;
@@ -11,7 +11,7 @@ Queries.layout = {
   getShowSidenav: fromRoot( state => state.showSidenav )
 };
 
-declare module 'ngrx-domains' {
+declare module 'ngrx-registry' {
   interface Root {
     layout: Query<LayoutState>;
   }
