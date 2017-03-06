@@ -1,6 +1,6 @@
 {
   "name": "ngrx-registry",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-alpha.4",
   "description": "A Global, Type friendly, registry for your **NGRX** logic",
   "author": "Peter Pavlovich <pavlovich@gmail.com>",
   "license": "MIT",
