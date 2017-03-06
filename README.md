@@ -399,3 +399,7 @@ The demo apps should consume a compiled version of **lib**, this is why there is
   - Use metadata via decorators in addition to `createDomain`?
   - remove dependency on `ngrx/store` (only using `ActionReducer` interface)
   - remove dependency on `reselect` (allow user to provide the selector factory)
+
+## CREDITS:
+
+This package is based on the 'ngrx-domains' NPM package devleoped by Shlomi Assaf (https://github.com/shlomiassaf).
